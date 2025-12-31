@@ -1,9 +1,6 @@
 #!/usr/bin/env bash
 set -e
 
-mkdir -p /azp/_work
-chown -R azdo:azdo /azp/_work
-
 # Optional: Agent files persistent ablegen
 mkdir -p /azp/agent
 chown -R azdo:azdo /azp/agent

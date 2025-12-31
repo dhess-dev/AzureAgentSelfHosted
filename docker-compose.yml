@@ -1,8 +1,19 @@
 services:
+  azdo-init:
+    image: ubuntu:22.04
+    container_name: azdo-init
+    command: ["bash", "-lc", "mkdir -p /azp/_work/_tool && chown -R 1655:1655 /azp/_work && chmod -R u+rwX,g+rwX /azp/_work"]
+    volumes:
+      - azdo-work:/azp/_work
+    restart: "no"
+
   azdo-agent:
     image: azdo-agent:4.266.2
     container_name: azdo-agent
     restart: unless-stopped
+    depends_on:
+      azdo-init:
+        condition: service_completed_successfully
     environment:
       AZP_URL: ${AZP_URL}
       AZP_TOKEN: ${AZP_TOKEN}
