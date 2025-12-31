@@ -1,0 +1,16 @@
+services:
+  azdo-agent:
+    image: azdo-agent:4.266.2
+    container_name: azdo-agent
+    restart: unless-stopped
+    environment:
+      AZP_URL: ${AZP_URL}
+      AZP_TOKEN: ${AZP_TOKEN}
+      AZP_POOL: ${AZP_POOL}
+      AZP_AGENT_NAME: ${AZP_AGENT_NAME}
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - azdo-work:/azp/_work
+
+volumes:
+  azdo-work:
